@@ -15,12 +15,12 @@ function formatQueryParams(query, words, symbol='lk_') {
 
 	// 去除分页参数，去除值为空，或非字符串的参数
 	let otherQuery = _.omitBy(query, (value, key) => {
-		return !value || typeof value != "string" || value.replace(/(^\s*)|(\s*$)/g, '') == '' || ['page', 'size'].indexOf(key) != -1
+		return !value || (typeof value === "string" && value.replace(/(^\s*)|(\s*$)/g, '') == '') || ['page', 'size'].indexOf(key) != -1
 	});
 
 	// 得出where条件
 	let where = _.pickBy(otherQuery, (value, key) => {
-		return key.indexOf(symbol) == -1 && (words ? words.indexOf(key) !=-1 : true);
+		return key.indexOf(symbol) == -1 && (( words && words.length > 0 ) ? ( words.indexOf(key) != -1 || words.indexOf('*' + key) != -1 ) : true);
 	});
 
 	// 得出like条件
@@ -31,8 +31,8 @@ function formatQueryParams(query, words, symbol='lk_') {
 	(value, key) => {
 		return key.replace(symbol, '');
 	});
-	if(words) {
-		like = _.pickBy(like, (value, key) => words.indexOf(key) != -1);
+	if(words && words.length > 0) {
+		like = _.pickBy(like, (value, key) => ( words.indexOf(key) || words.indexOf('*' + key) != -1 ) != -1);
 	}
 
 	return {

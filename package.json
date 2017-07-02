@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "babel-node packages/too-logger/test/index.js",
-    "dev-router": "babel-node packages/too-router/test/index.js"
+    "dev-router": "babel-node packages/too-router/test/index.js",
+		"link-all": "lerna exec npm link"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",

@@ -10,7 +10,7 @@ import defaults from './defaults';
 
 export default class Logger extends EventEmitter {
 
-	constructor (options) {
+	constructor (options={}) {
 		super();
 
 		this.opt = Merge.deep(true, defaults, options);
@@ -51,32 +51,35 @@ export default class Logger extends EventEmitter {
 	}
 
 	debug (msg) {
-		this._raw({
+		let o = {
 			level: chalk.green.bold('DEBUG'),
 			levelRaw: 'DEBUG',
 			ts: moment().format('HH:MM:SS'),
 			content: msg
-		});
+		};
+		this._raw(o);
 		this.emit('debug', o);
 	}
 
 	info (msg) {
-		this._raw({
+		let o = {
 			level: chalk.blue.bold('INFO'),
 			levelRaw: 'INFO',
 			ts: moment().format('HH:MM:SS'),
 			content: msg
-		});
+		};
+		this._raw(o);
 		this.emit('info', o);
 	}
 
 	warn (msg) {
-		this._raw({
+		let o = {
 			level: chalk.yellow.bold('WARN'),
 			levelRaw: 'WARN',
 			ts: moment().format('HH:MM:SS'),
 			content: msg
-		});
+		};
+		this._raw(o);
 		this.emit('warn', o);
 	}
 
@@ -88,7 +91,7 @@ export default class Logger extends EventEmitter {
 			content: msg
 		};
 	 	this._raw(o);
-	 	this.emit('error', o);
+	 	this.emit('err', o);
 	}
 
 }

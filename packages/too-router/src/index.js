@@ -13,6 +13,7 @@ export function params(...fields) {
 		ctx.$fields = fields;
 		try {
 			let result = await next();
+			if(result === undefined) { return; };
 			ctx.body = {
 				error: false,
 				model: result || 'success'
