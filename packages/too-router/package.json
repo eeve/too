@@ -4,7 +4,7 @@
  "main": "src/index.js",
  "scripts": {
   "dev": "babel-node ./test/index.js",
-	"test": "echo hello2"
+  "test": "echo hello2"
  },
  "dependencies": {
   "koa-router": "^7.2.1",
@@ -12,6 +12,6 @@
  },
  "devDependencies": {
   "koa": "^2.3.0",
-	"koa-body": "^2.3.0"
+  "koa-body": "^2.3.0"
  }
 }

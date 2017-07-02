@@ -1,10 +1,10 @@
 {
-	"name": "too-logger",
-	"version": "0.0.1",
-	"main": "src/index.js",
+  "name": "too-logger",
+  "version": "0.0.1",
+  "main": "src/index.js",
   "scripts": {
     "dev": "babel-node ./test/index.js",
-		"test": "echo hello1"
+    "test": "echo hello1"
   },
   "dependencies": {
     "chalk": "^2.0.1",
