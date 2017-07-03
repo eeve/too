@@ -43,6 +43,13 @@ export default class Logger extends EventEmitter {
 	}
 
 	async _raw (o) {
+		o.content = (o.content || []).map(item => {
+			if(item instanceof Object || item instanceof Array) {
+				return JSON.stringify(item, null, 2);
+			} else {
+				return `${item}`;
+			}
+		}).join(',');
 		let msg = `${o.ts} ${o.levelRaw}\t${o.content}\r`;
 		if(this.opt.writeFile) {
 			await this._appendLogFile(msg);
@@ -50,7 +57,7 @@ export default class Logger extends EventEmitter {
 		console.log(this.opt.colorful ? `${o.ts} ${o.level}\t${o.content}\r` : msg);
 	}
 
-	debug (msg) {
+	debug (...msg) {
 		let o = {
 			level: chalk.green.bold('DEBUG'),
 			levelRaw: 'DEBUG',
@@ -61,7 +68,7 @@ export default class Logger extends EventEmitter {
 		this.emit('debug', o);
 	}
 
-	info (msg) {
+	info (...msg) {
 		let o = {
 			level: chalk.blue.bold('INFO'),
 			levelRaw: 'INFO',
@@ -72,7 +79,7 @@ export default class Logger extends EventEmitter {
 		this.emit('info', o);
 	}
 
-	warn (msg) {
+	warn (...msg) {
 		let o = {
 			level: chalk.yellow.bold('WARN'),
 			levelRaw: 'WARN',
@@ -83,7 +90,7 @@ export default class Logger extends EventEmitter {
 		this.emit('warn', o);
 	}
 
-	error (msg) {
+	error (...msg) {
 		let o = {
 			level: chalk.red.bold('ERROR'),
 			levelRaw: 'ERROR',
