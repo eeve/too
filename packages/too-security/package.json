@@ -1,5 +1,5 @@
 {
-	"name": "too-security",
-	"version": "0.0.1-0",
-	"main": "src/index.js"
+  "name": "too-security",
+  "version": "0.0.1-1",
+  "main": "dist/index.js"
 }

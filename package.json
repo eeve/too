@@ -5,6 +5,7 @@
   "author": "eeve",
   "license": "MIT",
   "scripts": {
+		"prepublish": "lerna exec 'babel src --out-dir dist'",
     "dev": "babel-node packages/too-logger/test/index.js",
     "dev-router": "babel-node packages/too-router/test/index.js",
 		"link-all": "lerna exec npm link"
