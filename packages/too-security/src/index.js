@@ -1,4 +1,4 @@
-export export function Security(checkFn, noPremFn) {
+export default function Security(checkFn, noPremFn) {
 
 	return function security(...args) {
 		const permissions = args
@@ -8,9 +8,13 @@ export export function Security(checkFn, noPremFn) {
 				const ctx = arguments[0];
 				if(checkFn && checkFn instanceof Function
 				&& noPremFn && noPremFn instanceof Function) {
-					const has = checkFn(permissions);
+					const has = checkFn.call(ctx, {
+						controller: target.constructor.name,
+						method: name,
+						permission: permissions
+					});
 					if(!has) {
-						return noPremFn('没有权限！');
+						return noPremFn.call(ctx, '没有权限！');
 					}
 				}
 				return fn.apply(this, arguments);

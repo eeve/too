@@ -1,10 +1,9 @@
 {
  "name": "too-router",
- "version": "0.0.1",
+ "version": "0.0.0",
  "main": "src/index.js",
  "scripts": {
-  "dev": "babel-node ./test/index.js",
-  "test": "echo hello2"
+  "dev": "babel-node ./test/index.js"
  },
  "dependencies": {
   "koa-router": "^7.2.1",

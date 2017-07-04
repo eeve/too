@@ -1,8 +1,5 @@
 {
 	"name": "too-security",
-	"version": "0.0.1",
-	"main": "src/index.js",
-	"scripts": {
-		"test": "echo hello3"
-	}
+	"version": "0.0.0",
+	"main": "src/index.js"
 }
