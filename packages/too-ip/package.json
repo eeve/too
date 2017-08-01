@@ -1,0 +1,14 @@
+{
+  "name": "too-ip",
+  "version": "0.0.1-1",
+  "main": "dist/index.js",
+  "scripts": {
+		"dev": "babel-node ./test/index.js",
+		"test": "jest"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+		"jest": "^20.0.4"
+  }
+}

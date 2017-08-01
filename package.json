@@ -1,14 +1,13 @@
 {
   "name": "too",
-  "version": "0.0.0",
+  "version": "0.0.1-2",
   "main": "index.js",
   "author": "eeve",
   "license": "MIT",
   "scripts": {
-		"prepublish": "lerna exec 'babel src --out-dir dist'",
-    "dev": "babel-node packages/too-logger/test/index.js",
-    "dev-router": "babel-node packages/too-router/test/index.js",
-		"link-all": "lerna exec npm link"
+    "prepublish": "lerna exec 'babel src --out-dir dist'",
+    "dev": "lerna exec 'babel src --watch --out-dir dist'",
+    "link-all": "lerna exec npm link"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",

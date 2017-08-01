@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`binarySearch 1`] = `
+Object {
+  "city": 166,
+  "region": "美国|0|0|0|0",
+}
+`;
+
+exports[`binarySearch 2`] = `
+Object {
+  "city": 166,
+  "region": "美国|0|0|0|0",
+}
+`;
+
+exports[`should query 1`] = `
+Object {
+  "city": 1015,
+  "region": "中国|华东|江苏省|南京市|0",
+}
+`;
+
+exports[`should query 2`] = `
+Object {
+  "city": 166,
+  "region": "美国|0|0|0|0",
+}
+`;

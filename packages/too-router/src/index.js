@@ -1,5 +1,5 @@
-import Router from 'koa-router'
-const router = new Router()
+import Router from 'koa-router';
+export const router = new Router();
 
 import * as all from './decorator/router';
 export const rt = all;
@@ -30,13 +30,13 @@ export function params(...fields) {
 
 export function register(ctrls) {
 
-	console.log('注册mapping:')
-	console.log('==========================================')
+	console.log('注册mapping:');
+	console.log('==========================================');
 	for(let ctrl in ctrls) {
-		let instance = new ctrls[ctrl]()
-		router.use(instance.router.routes(), instance.router.allowedMethods())
+		let instance = new ctrls[ctrl]();
+		router.use(instance.router.routes(), instance.router.allowedMethods());
 	}
-	console.log('==========================================')
+	console.log('==========================================');
 	return router;
 
 }
