@@ -15,7 +15,7 @@ function formatQueryParams(query, words, symbol='lk_') {
 
 	// 去除分页参数，去除值为空，或非字符串的参数
 	let otherQuery = _.omitBy(query, (value, key) => {
-		return !value || (typeof value === "string" && value.replace(/(^\s*)|(\s*$)/g, '') == '') || ['page', 'size'].indexOf(key) != -1
+		return value === null || typeof value === 'undefined' || (typeof value === "string" && value.replace(/(^\s*)|(\s*$)/g, '') == '') || ['page', 'size'].indexOf(key) != -1
 	});
 
 	// 得出where条件
