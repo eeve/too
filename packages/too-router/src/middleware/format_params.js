@@ -19,7 +19,7 @@ export default (ctx, next) => {
 	// 判断必须参数是否都存在
 	ctx.$fields && ctx.$fields.forEach((field) => {
 		let name = field.replace(/\*/g, '');
-		if(field.indexOf('*') != -1 && !ctx.$query[name]) {
+		if(field.indexOf('*') != -1 && (ctx.$query[name] === null || typeof ctx.$query[name] === 'undefined')) {
 			// 是必须参数，但是没有此参数
 			throw new Error(`缺少参数${name}`);
 		}
