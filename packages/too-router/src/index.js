@@ -16,7 +16,7 @@ export function params(...fields) {
 			if(result === undefined) { return; };
 			ctx.body = {
 				error: false,
-				model: result || 'success'
+				model: result
 			};
 		} catch({ message }) {
 			ctx.body = {

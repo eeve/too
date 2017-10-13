@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 // for ip2long
 const ipbase = [16777216, 65536, 256, 1];
@@ -233,7 +234,7 @@ function getLong(buffer, offset) {
 }
 
 
-exports.create = function(db_path = __dirname + '/data/ip2region.db') {
+exports.create = function(db_path = path.resolve(__dirname, '../data/ip2region.db')) {
     if (typeof(db_path) == "undefined" || fs.exists(db_path) ) {
         throw("[ip2region] db file not exists : " + db_path);
     }
