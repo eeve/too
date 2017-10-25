@@ -26,6 +26,7 @@ export function controller(...args) {
 				const url = `${controllerRoute}${actionRoute}`
 				const middleware = [].concat(controllerMiddleware, actionMiddleware)
 				const fnName = prop.substring(PREFIX.length)
+				target[`${PREFIX}${fnName}`].fullRoute = url
 				return {
 					method: method === 'del' ? 'delete' : method,
 					url,
