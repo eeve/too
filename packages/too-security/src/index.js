@@ -4,11 +4,11 @@ export default function Security(checkFn, noPremFn) {
 		const permissions = args
 		return function(target, name, descriptor) {
 			const fn = descriptor.value;
-			descriptor.value = function() {
+			descriptor.value = async function() {
 				const ctx = arguments[0];
 				if(checkFn && checkFn instanceof Function
 				&& noPremFn && noPremFn instanceof Function) {
-					const has = checkFn.call(ctx, {
+					const has = await checkFn.call(ctx, {
 						target: target,
 						controller: target.constructor.name,
 						method: name,
