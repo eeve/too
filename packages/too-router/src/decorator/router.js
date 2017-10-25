@@ -2,12 +2,17 @@ const PREFIX = '$$route_'
 
 function formatArgs(args) {
 	const hasRoute = typeof args[0] === 'string'
+	const hasDesc = args.length > 1 && typeof args[args.length - 1] === 'string'
 	const route = hasRoute ? args[0] : ''
+	const desc = hasDesc ? args[args.length - 1] : ''
+	if(hasDesc) {
+		args = args.slice(0, -1)
+	}
 	const middleware = hasRoute ? args.slice(1) : args
 	if (middleware.some(m => typeof m !== 'function')) {
     throw new Error('Middleware must be function')
   }
-	return [ route, middleware ]
+	return [ route, middleware, desc ]
 }
 
 export function controller(...args) {
@@ -17,7 +22,7 @@ export function controller(...args) {
 		proto.$routes = Object.getOwnPropertyNames(proto)
 			.filter(prop => prop.indexOf(PREFIX) === 0)
 			.map(prop => {
-        const {method, route: actionRoute, middleware: actionMiddleware} = proto[prop]
+        const {method, route: actionRoute, middleware: actionMiddleware, desc} = proto[prop]
 				const url = `${controllerRoute}${actionRoute}`
 				const middleware = [].concat(controllerMiddleware, actionMiddleware)
 				const fnName = prop.substring(PREFIX.length)
@@ -25,9 +30,10 @@ export function controller(...args) {
 					method: method === 'del' ? 'delete' : method,
 					url,
 					middleware,
+					desc,
 					fnName
 				}
-			});
+			})
   }
 }
 
@@ -35,9 +41,9 @@ export function mapping(method, ...args) {
 	if(typeof method !== 'string') {
 		throw new Error('The first argument must be an HTTP method')
 	}
-	const [ route, middleware ] = formatArgs(args)
+	const [ route, middleware, desc ] = formatArgs(args)
   return function(target, name, descriptor) {
-		target[`${PREFIX}${name}`] = { method, route, middleware }
+		target[`${PREFIX}${name}`] = { method, route, middleware, desc }
   }
 }
 

@@ -9,8 +9,10 @@ export default function Security(checkFn, noPremFn) {
 				if(checkFn && checkFn instanceof Function
 				&& noPremFn && noPremFn instanceof Function) {
 					const has = checkFn.call(ctx, {
+						target: target,
 						controller: target.constructor.name,
 						method: name,
+						fn: fn,
 						permission: permissions
 					});
 					if(!has) {
