@@ -15,8 +15,8 @@ export default function Security(checkFn, noPremFn) {
 						fn: fn,
 						permission: permissions
 					});
-					if(!has) {
-						return noPremFn.call(ctx, '没有权限！');
+					if(has !== true) {
+						return noPremFn.call(ctx, '没有权限！', has);
 					}
 				}
 				return fn.apply(this, arguments);
