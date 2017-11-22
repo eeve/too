@@ -1,9 +1,9 @@
-import { formatQueryParams, pickParams as pick } from '../util';
+import { formatQueryParams, pickParams as pick, clearEmptyParams } from '../util';
 
 export default (ctx, next) => {
 
-	// 将所有的参数都合并到一个对象
-	let allparams = { ...ctx.params, ...ctx.request.query }
+	// 将所有的参数都合并到一个对象, 并丢弃url与querystr中的空值参数
+	let allparams = clearEmptyParams({ ...ctx.params, ...ctx.request.query })
 	if(ctx.request.body && ctx.request.body.fields && ctx.request.body.files) { // 存在文件上传
 		allparams = { ...allparams, ...ctx.request.body.fields }
 	} else {

@@ -13,9 +13,9 @@ function formatQueryParams(query, words, symbol='lk_') {
 	// 分页参数
 	let pagination = { page: query.page, size: query.size };
 
-	// 去除分页参数，去除值为空，或非字符串的参数
+	// 去除分页参数
 	let otherQuery = _.omitBy(query, (value, key) => {
-		return value === null || typeof value === 'undefined' || (typeof value === "string" && value.replace(/(^\s*)|(\s*$)/g, '') == '') || ['page', 'size'].indexOf(key) != -1
+		return ['page', 'size'].indexOf(key) != -1
 	});
 
 	// 得出where条件
@@ -39,6 +39,16 @@ function formatQueryParams(query, words, symbol='lk_') {
 		pagination, where, like
 	}
 
+}
+
+/**
+ * 去除query对象中的空值属性
+ * 去除值为空，或非字符串的属性
+ */
+function clearEmptyParams(query) {
+	return _.omitBy(query, (value, key) => {
+		return value === null || typeof value === 'undefined' || (typeof value === "string" && value.replace(/(^\s*)|(\s*$)/g, '') == '');
+	});
 }
 
 
@@ -98,5 +108,5 @@ function findModel(Service, fetchOptions, where, like) {
 }
 
 export {
-	formatQueryParams, pickParams, findModelPage, findModel
+	formatQueryParams, clearEmptyParams, pickParams, findModelPage, findModel
 }
